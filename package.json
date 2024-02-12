@@ -5,9 +5,9 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "generateRealWords": "tsx src/index.ts",
-    "generateRealWordsToFile": "tsx src/index.ts --  > result.txt",
+    "dev": "NODE_ENV=dev tsx watch src/index.ts",
+    "generateRealWords": "NODE_ENV=prod tsx src/index.ts",
+    "generateRealWordsToFile": "NODE_ENV=prod tsx src/index.ts > result.txt",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -30,6 +30,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.23.9",
+    "babel-jest": "^29.7.0",
     "check-word": "^1.1.0"
   }
 }
