@@ -1,8 +1,8 @@
 import checkWord from "check-word";
 
-function acceptScring(s: string) {
-  let permutations: Map<string, boolean> = new Map();
-  let realWorldWords: string[] = [];
+export function acceptScring(s: string) {
+  let permutations: Map<string, boolean>;
+  let realWorldWords: string[];
 
   const isValid = verifyInput(s);
 
@@ -17,12 +17,18 @@ function acceptScring(s: string) {
   return realWorldWords;
 }
 
-function verifyInput(s: string) {
+export function verifyInput(s: string) {
   let isValid = false;
   const areAllLetters = !/[^a-z]/i.test(s);
 
-  if (s.length === 0) {
+  if (!s) {
+    console.error("error: please enter a valid argument");
+  } else if (s.length === 0) {
     console.error("error: please enter a non empty string");
+  } else if (s.length > 8) {
+    console.error(
+      "error: string is too long, only character count of 8 or less currently accepted"
+    );
   } else if (!areAllLetters) {
     console.error("error: strings may only include english letters");
   } else {
@@ -31,7 +37,7 @@ function verifyInput(s: string) {
   return isValid;
 }
 
-function generatePermutationsRecursively(s: string) {
+export function generatePermutationsRecursively(s: string) {
   let permutations: Map<string, boolean> = new Map();
   function generatePermutations(
     constructedString: string,
@@ -72,7 +78,9 @@ function generatePermutationsRecursively(s: string) {
   return permutations;
 }
 
-function checkWordsAreReal(permutations: Map<string, boolean>): string[] {
+export function checkWordsAreReal(
+  permutations: Map<string, boolean>
+): string[] {
   const correctWords = [];
   const wordChecker = checkWord("en");
 
@@ -89,5 +97,6 @@ function checkWordsAreReal(permutations: Map<string, boolean>): string[] {
   return correctWords;
 }
 
-console.log(acceptScring("asdf"));
-// console.log(acceptScring(process.argv.slice(2)[0]));
+// for dev, call directly without using process
+// console.log(acceptScring("assdp"));
+console.log(acceptScring(process.argv.slice(2)[0]));
