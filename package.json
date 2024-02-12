@@ -5,8 +5,9 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js",
     "dev": "tsx watch src/index.ts",
+    "generateRealWords": "tsx src/index.ts",
+    "generateRealWordsToFile": "tsx src/index.ts --  > result.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,6 +27,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "check-word": "^1.1.0",
     "dictionary-en": "^4.0.0",
     "nspell": "^2.1.5"
   }
