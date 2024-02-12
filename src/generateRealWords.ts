@@ -19,6 +19,7 @@ export default function generateRealWords(inputString: string): string[] {
 
 export function verifyInput(inputString: string): boolean {
   let isValid = false;
+  // test for english letters
   const areAllLetters = !/[^a-z]/i.test(inputString);
 
   if (!inputString) {
@@ -55,7 +56,7 @@ export function generatePermutationsRecursively(
       return;
     }
     for (let i = 0; i < remainingCharacters.length; i++) {
-      // add character at node in tree if it doesn't already exist and not ''
+      // add character at node in tree to permutations if it doesn't already exist and not ''
       if (
         !permutations.get(constructedString) &&
         constructedString.length > 0
