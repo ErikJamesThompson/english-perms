@@ -1,21 +1,38 @@
-import nspell from "nspell";
-import en from "dictionary-en";
 import checkWord from "check-word";
 
 function acceptScring(s: string) {
-  const permutations: Map<string, boolean> = new Map();
+  let permutations: Map<string, boolean> = new Map();
   let realWorldWords: string[] = [];
 
-  generatePermutationsRecursively(s, permutations);
+  const isValid = verifyInput(s);
+
+  if (!isValid) {
+    console.error("error: invalid input, see above error");
+    return;
+  }
+
+  permutations = generatePermutationsRecursively(s);
   realWorldWords = checkWordsAreReal(permutations);
 
   return realWorldWords;
 }
 
-function generatePermutationsRecursively(
-  s: string,
-  permutations: Map<string, boolean>
-) {
+function verifyInput(s: string) {
+  let isValid = false;
+  const areAllLetters = !/[^a-z]/i.test(s);
+
+  if (s.length === 0) {
+    console.error("error: please enter a non empty string");
+  } else if (!areAllLetters) {
+    console.error("error: strings may only include english letters");
+  } else {
+    isValid = true;
+  }
+  return isValid;
+}
+
+function generatePermutationsRecursively(s: string) {
+  let permutations: Map<string, boolean> = new Map();
   function generatePermutations(
     constructedString: string,
     remainingCharacters: string
@@ -61,6 +78,8 @@ function checkWordsAreReal(permutations: Map<string, boolean>): string[] {
 
   for (let word of permutations.keys()) {
     // TODO find a better library that is still fast
+    // but allows refinement of valid words
+    // e.g. disallow affixes, prefixes
     const isValidEnglishWord = wordChecker.check(word);
 
     if (isValidEnglishWord) {
@@ -70,4 +89,5 @@ function checkWordsAreReal(permutations: Map<string, boolean>): string[] {
   return correctWords;
 }
 
-console.log(acceptScring(process.argv.slice(2)[0]));
+console.log(acceptScring("asdf"));
+// console.log(acceptScring(process.argv.slice(2)[0]));
