@@ -47,7 +47,7 @@ This Project can be run in the CLI by the following commands:
    ```
 3. DEV: Generate words, output is logged to console. Input may be edited in `./src/index.ts` file
    ```sh
-   npm run dev {{string here}}
+   npm run dev
    ```
 4. Tests may be run by
    ```sh
