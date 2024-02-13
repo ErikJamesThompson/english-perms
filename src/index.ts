@@ -1,5 +1,9 @@
 import generateRealWords from "./generateRealWords.js";
 
+/**
+ * Deduces environment and generates permutations with passed in argument or hardcoded
+ * @returns {string[]} collection of real world words
+ */
 export default function init() {
   const environment = process.env.NODE_ENV;
   if (environment === "dev") {

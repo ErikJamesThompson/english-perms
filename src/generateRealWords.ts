@@ -1,5 +1,11 @@
 import checkWord from "check-word";
 
+/**
+ * Returns the real world checked permutations of the input string
+ * @module src/generateRealWords
+ * @param {string} inputString - input string to be permutated
+ * @returns {string[]} collection of real world words
+ */
 export default function generateRealWords(inputString: string): string[] {
   let permutations: Map<string, boolean>;
   let realWorldWords: string[] = [];
@@ -17,6 +23,11 @@ export default function generateRealWords(inputString: string): string[] {
   return realWorldWords;
 }
 
+/**
+ * Checks the input is valid according to length and composition
+ * @param {string} inputString - input string
+ * @returns {boolean} boolean indicating if string is valid
+ */
 export function verifyInput(inputString: string): boolean {
   let isValid = false;
   // test for english letters
@@ -38,6 +49,11 @@ export function verifyInput(inputString: string): boolean {
   return isValid;
 }
 
+/**
+ * Generates permutations of input string
+ * @param {string} inputString - input string to generate permutations from
+ * @returns {Map<string, boolean>} map of generated permutations of input string
+ */
 export function generatePermutationsRecursively(
   inputString: string
 ): Map<string, boolean> {
@@ -47,7 +63,6 @@ export function generatePermutationsRecursively(
     remainingCharacters: string
   ) {
     // add permutation if exists and exit out of current call
-    // I like more explicit return rather than else (more readable)
     if (
       remainingCharacters.length === 0 &&
       !permutations.get(constructedString)
@@ -56,7 +71,7 @@ export function generatePermutationsRecursively(
       return;
     }
     for (let i = 0; i < remainingCharacters.length; i++) {
-      // add character at node in tree to permutations if it doesn't already exist and not ''
+      // add character at node in tree to permutation map if it doesn't already exist and not ''
       if (
         !permutations.get(constructedString) &&
         constructedString.length > 0
@@ -81,6 +96,11 @@ export function generatePermutationsRecursively(
   return permutations;
 }
 
+/**
+ * Checks keys of permutation against dictionary library
+ * @param {Map<string, boolean>} permutations - map of generated permutations
+ * @returns {string[]} array of real world verified words from permutations
+ */
 export function checkWordsAreReal(
   permutations: Map<string, boolean>
 ): string[] {
@@ -88,9 +108,6 @@ export function checkWordsAreReal(
   const wordChecker = checkWord("en");
 
   for (let word of permutations.keys()) {
-    // TODO find a better library that is still fast
-    // but allows refinement of valid words
-    // e.g. disallow affixes, prefixes
     const isValidEnglishWord = wordChecker.check(word);
 
     if (isValidEnglishWord) {
