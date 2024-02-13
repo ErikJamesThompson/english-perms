@@ -67,6 +67,7 @@ export function generatePermutationsRecursively(
       return;
     }
 
+    // if end of potential branch, set and exit out
     if (remainingCharacters.length === 0) {
       permutations.set(constructedString, true);
       return;
