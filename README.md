@@ -8,7 +8,9 @@ The list of acceptable english words is currently based on this [project](https:
 
 ### English Word Considerations
 
-Many words exist in various dictionaries that aren't often used in common parlance.
+Current library does not recognize single character words ("a")
+
+Additionally, many words exist in various dictionaries that aren't often used in common parlance.
 
 Running the Below Command
 
@@ -35,6 +37,20 @@ I wasn't expecting examples like
 - [doo](https://www.dictionary.com/browse/doo) - (noun) Another word for a pigeon!
 
 Refinement of dictionary entries or specificity in types of words allowed seems like the right way to ensure we are pulling from a "correct" pool of words. On the roadmap is further investigation into third party applications that may grant us the specificity we desire.
+
+### Performance Considerations
+
+Current input length is limited to lower than 8 characters. While the program handles duplicates, unique strings still generate longer runtimes. Below is a rough breakdown when there are 7 characters passed in with variable amount of duplicates.
+
+| # Unique Chars | Output Time(s) |
+| -------------- | -------------- |
+| 7              | 44.58          |
+| 6              | 21.77          |
+| 5              | 7.8            |
+| 4              | 2.21           |
+| 3              | 0.53           |
+
+Due to the exponential increase in runtime, input strings are limited to 7 characters.
 
 ## Getting Started
 
@@ -92,7 +108,7 @@ This Project can be run in the CLI by the following commands:
 
 - [ ] Investigate better dictionary libraries
 - [ ] Improve overall performance
-  - [ ] **Reduce permutation calls when duplicate letters exist in permutations object**
+  - [x] **Reduce permutation calls when duplicate letters exist in permutations object**
     - [ ] Re-evaluate permutations object -> array if duplicates area already handled
   - [ ] Ensure performance of dictionary lookup. May need revisit depending on library chosen
 - [ ] Improve console experience.

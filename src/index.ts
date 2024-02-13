@@ -7,8 +7,11 @@ import generateRealWords from "./generateRealWords.js";
 export default function init() {
   const environment = process.env.NODE_ENV;
   if (environment === "dev") {
+    console.time();
     // for dev, call directly without using process
-    return generateRealWords("assp");
+    const words = generateRealWords("asaaafj");
+    console.timeEnd();
+    return words;
   }
   if (environment === "prod") {
     return generateRealWords(process.argv.slice(2)[0]);

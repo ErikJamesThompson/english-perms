@@ -62,20 +62,18 @@ export function generatePermutationsRecursively(
     constructedString: string,
     remainingCharacters: string
   ) {
-    // add permutation if exists and exit out of current call
-    if (
-      remainingCharacters.length === 0 &&
-      !permutations.get(constructedString)
-    ) {
+    // if permutation already generated, exit out of branch
+    if (permutations.get(constructedString)) {
+      return;
+    }
+
+    if (remainingCharacters.length === 0) {
       permutations.set(constructedString, true);
       return;
     }
     for (let i = 0; i < remainingCharacters.length; i++) {
       // add character at node in tree to permutation map if it doesn't already exist and not ''
-      if (
-        !permutations.get(constructedString) &&
-        constructedString.length > 0
-      ) {
+      if (constructedString.length > 0) {
         permutations.set(constructedString, true);
       }
 
