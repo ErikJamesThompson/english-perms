@@ -38,6 +38,8 @@ I wasn't expecting examples like
 
 Refinement of dictionary entries or specificity in types of words allowed seems like the right way to ensure we are pulling from a "correct" pool of words. On the roadmap is further investigation into third party applications that may grant us the specificity we desire.
 
+<!--
+
 ### Performance Considerations
 
 Current input length is limited to lower than 8 characters. While the program handles duplicates, unique strings still generate longer runtimes. Below is a rough breakdown when there are 7 characters passed in with variable amount of duplicates.
@@ -51,6 +53,7 @@ Current input length is limited to lower than 8 characters. While the program ha
 | 3              | 0.53           |
 
 Due to the exponential increase in runtime, input strings are limited to 7 characters.
+-->
 
 ## Getting Started
 

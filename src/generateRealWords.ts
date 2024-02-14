@@ -62,11 +62,6 @@ export function generatePermutationsRecursively(
     constructedString: string,
     remainingCharacters: string
   ) {
-    // if permutation already generated, exit out of branch
-    if (permutations.get(constructedString)) {
-      return;
-    }
-
     // if end of potential branch, set and exit out
     if (remainingCharacters.length === 0) {
       permutations.set(constructedString, true);
